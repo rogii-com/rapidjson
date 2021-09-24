@@ -139,6 +139,7 @@ if(RAPIDJSON_BUILD_TESTS)
     include(CTest)
 endif()
 
+#[[
 # pkg-config
 IF (UNIX OR CYGWIN)
   CONFIGURE_FILE (${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.pc.in
@@ -152,11 +153,13 @@ ENDIF()
 install(FILES readme.md
         DESTINATION "${DOC_INSTALL_DIR}"
         COMPONENT doc)
+]]
 
 install(DIRECTORY include/rapidjson
     DESTINATION "${INCLUDE_INSTALL_DIR}"
     COMPONENT dev)
 
+#[[
 install(DIRECTORY example/
     DESTINATION "${DOC_INSTALL_DIR}/examples"
     COMPONENT examples
@@ -165,12 +168,12 @@ install(DIRECTORY example/
     PATTERN "CMakeFiles" EXCLUDE
     PATTERN "Makefile" EXCLUDE
     PATTERN "cmake_install.cmake" EXCLUDE)
-
+]]
 # Provide config and version files to be used by other applications
 # ===============================
 
 export(PACKAGE ${PROJECT_NAME})
-
+#[[
 # cmake-modules
 CONFIGURE_FILE(${PROJECT_NAME}Config.cmake.in
     ${PROJECT_NAME}Config.cmake
@@ -183,3 +186,4 @@ INSTALL(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
     DESTINATION "${CMAKE_INSTALL_DIR}"
     COMPONENT dev)
+]]

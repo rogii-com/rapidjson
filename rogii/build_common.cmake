@@ -1,10 +1,9 @@
 if(
     NOT DEFINED ROOT
-    OR NOT DEFINED ARCH
 )
     message(
         FATAL_ERROR
-        "Assert: ROOT = ${ROOT}; ARCH = ${ARCH}"
+        "Assert: ROOT = ${ROOT}"
     )
 endif()
 
@@ -70,27 +69,27 @@ set(
 )
 
 set(
-    DEBUG_PATH
-    "${CMAKE_CURRENT_LIST_DIR}/../build/debug_${ARCH}"
+    BUILD_PATH
+    "${CMAKE_CURRENT_LIST_DIR}/../build"
 )
 
 file(
     MAKE_DIRECTORY
-    "${DEBUG_PATH}"
+    "${BUILD_PATH}"
 )
 
 execute_process(
     COMMAND
-        "${CMAKE_COMMAND}" -G Ninja -DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_EXAMPLES=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} ../..
+        "${CMAKE_COMMAND}" -G Ninja -DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_EXAMPLES=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} ..
     WORKING_DIRECTORY
-        "${DEBUG_PATH}"
+        "${BUILD_PATH}"
 )
 
 execute_process(
     COMMAND
         "${CMAKE_COMMAND}" --build . --target install
     WORKING_DIRECTORY
-        "${DEBUG_PATH}"
+        "${BUILD_PATH}"
 )
 
 file(

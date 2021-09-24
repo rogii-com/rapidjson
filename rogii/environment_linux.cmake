@@ -1,8 +1,3 @@
-set(
-    REPOSITORY_OS
-    "linux"
-)
-
 CNPM_ADD_PACKAGE(
     NAME
         gxx_runtime
